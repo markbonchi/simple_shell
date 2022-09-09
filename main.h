@@ -155,5 +155,64 @@ int is_executable(data_sh *dsh);
 int check_error_cmd(char *dir, data_sh *dsh);
 int cmd_exec(data_sh *dsh);
 
+/* env.c */
+char *_getenv(const char *name, char **_environ);
+int _env(data_sh *dsh);
+
+/* env1.c */
+char *copy_info(char *name, char *value);
+void set_env(char *name, char *value, data_sh, *dsh);
+int _setenv(data_sh *dsh);
+int _unsetenv(data_sh *dsh);
+
+/* cd.c */
+void cd_dot(data_sh *dsh);
+void cd_to(data_sh *dsh);
+void cd_previous(data_sh *dsh);
+void cd_to_home(data_sh *dsh);
+
+/* cd_shell.c */
+int cd_shell(data_sh *dsh);
+
+/* get_builtin.c */
+int (*get_builtin(char *cmd))(data_sh *dsh);
+
+/* _exit.c */
+int exit_shell(data_sh *dsh);
+
+/* aux_stdlib.c */
+int get_len(int n);
+char *aux_itoa(int n);
+int _atoi(char *s);
+
+/* aux_error.c */
+char *strcat_cd(data_sh *, char *, char *, char *);
+char *error_get_cd(data_sh *dsh);
+char *error_not_found(data_sh *dsh);
+char *error_exit_shell(data_sh *dsh);
+char *error_get_alias(char **args);
+char *error_env(data_sh *dsh);
+char *error_syntax(char **args);
+char *error_permission(char **args);
+char *error_path_126(data_sh *dsh);
+
+/* get_error.c */
+void get_error(data_sh *dsh, int eval);
+
+/* get_sigint.c */
+void get_sigint(int sig);
+
+/* aux_help.c */
+void aux_help_env(void);
+void aux_help_setenv(void);
+void aux_help_unsetenv(void);
+void aux_help_general(void);
+void aux_help_exit(void);
+void aux_help(void);
+void aux_help_alias(void);
+void aux_help_cd(void);
+
+/* get_help.c */
+int get_help(data_sh *dsh);
 
 #endif
