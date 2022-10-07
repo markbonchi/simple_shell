@@ -4,7 +4,7 @@
  * add_rvar_node - adds a variable at the end
  */
 
-r_var *add_rvar_node(r_var **ead, int lvar, char *val, int lval)
+r_var *add_rvar_node(r_var **head, int lvar, char *val, int lval)
 {
 	r_var *new, *temp;
 
@@ -16,7 +16,7 @@ r_var *add_rvar_node(r_var **ead, int lvar, char *val, int lval)
 	new->val = val;
 	new->len_val = lval;
 
-	new->next = NUL;
+	new->next = NULL;
 	temp = *head;
 
 	if (temp == NULL)
@@ -44,7 +44,7 @@ void free_rvar_list(r_var **head)
 		while ((temp = curr) != NULL)
 		{
 			curr = curr->next;
-			free(temp;)
+			free(temp);
 		}
 		*head = NULL;
 	}

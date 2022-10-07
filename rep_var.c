@@ -17,7 +17,7 @@ void check_env(r_var **h, char *in, data_sh *dsh)
 			if (_envr[row][chr] == '=')
 			{
 				lval = _strlen(_envr[row] + chr + 1);
-				add_rvar_node = (h, j, _envr[row] + chr + 1, lval);
+				add_rvar_node(h, j, _envr[row] + chr + 1, lval);
 				return;
 			}
 
@@ -28,7 +28,7 @@ void check_env(r_var **h, char *in, data_sh *dsh)
 		}
 
 	for (j = 0; in[j]; j++)
-		if (in[j] == ' ' || in[j] '\t' || in[j] == ';' || in[j] == '\n')
+		if (in[j] == ' ' || in[j] == '\t' || in[j] == ';' || in[j] == '\n')
 			break;
 
 	add_rvar_node(h, j, NULL, 0);
@@ -38,7 +38,7 @@ void check_env(r_var **h, char *in, data_sh *dsh)
  * check_vars - checks if the typed variable is $$ or $?
  */
 
-int check_vars(r_var **h, char *un, char*st, data_sh *dsh)
+int check_vars(r_var **h, char *in, char*st, data_sh *dsh)
 {
 	int i, lst, lpd;
 
@@ -49,21 +49,21 @@ int check_vars(r_var **h, char *un, char*st, data_sh *dsh)
 		if (in[i] == '$')
 		{
 			if (in[i + 1] == '?')
-				add_rvvar_node(h, 2, st, lst), i++;
+				add_rvar_node(h, 2, st, lst), i++;
 			else if (in[i + 1] == '$')
 				add_rvar_node(h, 2, dsh->pid, lpd), i++;
 			else if (in[i + 1] == '\n')
-				add_rvar_node(h, 0, NULL, 0;);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == '\0')
-				add_rvar_node(h, 0, NULL, 0;);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == ' ')
-				add_rvar_node(h, 0, NULL, 0;);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == '\t')
-				add_rvar_node(h, 0, NULL, 0;);
+				add_rvar_node(h, 0, NULL, 0);
 			else if (in[i + 1] == ';')
-				add_rvar_node(h, 0, NULL, 0;);
+				add_rvar_node(h, 0, NULL, 0);
 			else
-				check_env(h, in + i, data);
+				check_env(h, in + i, dsh);
 		}
 
 	return (i);
@@ -124,7 +124,7 @@ char *rep_var(char *input, data_sh *dsh)
 	status = aux_itoa(dsh->status);
 	head = NULL;
 
-	olen = checks_vars(&head, input, status, dsh);
+	olen = check_vars(&head, input, status, dsh);
 
 	if (head == NULL)
 	{
@@ -143,7 +143,7 @@ char *rep_var(char *input, data_sh *dsh)
 
 	nlen += olen;
 
-	new_input = malloc(sizeipf(char) * (nlen + 1));
+	new_input = malloc(sizeof(char) * (nlen + 1));
 	new_input[nlen] = '\0';
 
 	new_input = replace_input(&head, input, new_input, nlen);

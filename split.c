@@ -64,7 +64,7 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input)
 	do {
 		line = swap_char(line, 1);
 		add_line_node_end(head_l, line);
-		line = _strtok(NULL, ";|&")
+		line = _strtok(NULL, ";|&");
 	} while (line != NULL);
 }
 
@@ -87,11 +87,11 @@ void go_next(sep_list **list_s, line_list **list_l, data_sh *dsh)
 		if (dsh->status == 0)
 		{
 			if (ls_s->separator == '&' || ls_s->separator == ';')
-				loop_s = 0;
+				loop_sep = 0;
 			if (ls_s->separator == '|')
 			{
 				ls_l = ls_l->next;
-				ls_s = ls->separator;
+				ls_s = ls_s->next;
 			}
 		} else
 		{
@@ -116,7 +116,7 @@ void go_next(sep_list **list_s, line_list **list_l, data_sh *dsh)
  * ;, | and & and executes them
  */
 
-int split_command(data_sh *dsh, char *input)
+int split_commands(data_sh *dsh, char *input)
 {
 	sep_list *head_s, *list_s;
 	line_list *head_l, *list_l;
@@ -140,9 +140,14 @@ int split_command(data_sh *dsh, char *input)
 		if (loop == 0)
 			break;
 
+		go_next(&list_s, &list_l, dsh);
+
 		if (list_l != NULL)
 			list_l = list_l->next;
 	}
+
+	free_sep_list(&head_s);
+	free_line_list(&head_l);
 
 	if (loop == 0)
 		return (0);

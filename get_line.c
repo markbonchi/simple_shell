@@ -22,7 +22,7 @@ void bring_line(char **lineptr, size_t *n, char *buffer, size_t j)
 		*lineptr = buffer;
 	} else
 	{
-		_strcpy(*linptr, buffer);
+		_strcpy(*lineptr, buffer);
 		free(buffer);
 	}
 }
@@ -46,7 +46,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	input = 0;
 
 	buffer = malloc(sizeof(char) * BUFSIZE);
-	if (bufer == 0)
+	if (buffer == 0)
 		return (-1);
 
 	while (t != '\n')
@@ -57,9 +57,9 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 			free(buffer);
 			return (-1);
 		}
-		if ( == 0 && input != 0)
+		if (i == 0 && input != 0)
 		{
-			inpt++;
+			input++;
 			break;
 		}
 		if (input >= BUFSIZE)
@@ -68,6 +68,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 		input++;
 	}
 	buffer[input] = '\0';
+	bring_line(lineptr, n, buffer, input);
 	retval = input;
 	if (i != 0)
 		input = 0;

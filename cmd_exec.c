@@ -25,7 +25,7 @@ int is_cdir(char *path, int *i)
 char *_which(char *cmd, char **_environ)
 {
 	char *path, *ptr_path, *token_path, *dir;
-	int ;en_dir, len_cmd, i;
+	int len_dir, len_cmd, i;
 	struct stat st;
 
 	path = _getenv("PATH", _environ);
@@ -41,7 +41,7 @@ char *_which(char *cmd, char **_environ)
 				if (stat(cmd, &st) == 0)
 					return (cmd);
 			len_dir = _strlen(token_path);
-			dir = malloc(len_sir + len_cmd + 2);
+			dir = malloc(len_dir + len_cmd + 2);
 			_strcpy(dir, token_path);
 			_strcpy(dir, "/");
 			_strcpy(dir, cmd);
@@ -133,7 +133,7 @@ int check_error_cmd(char *dir, data_sh *dsh)
 			return (1);
 		}
 
-	return (0)
+	return (0);
 }
 
 /**
@@ -164,7 +164,7 @@ int cmd_exec(data_sh *dsh)
 			dir = _which(dsh->args[0], dsh->_environ);
 		else
 			dir = dsh->args[0];
-		execve(dir + exec, dsh->args, dsh->environ);
+		execve(dir + exec, dsh->args, dsh->_environ);
 	} else if (pd < 0)
 	{
 		perror(dsh->av[0]);

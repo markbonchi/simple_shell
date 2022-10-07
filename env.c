@@ -54,7 +54,7 @@ int _env(data_sh *dsh)
 		j = 0;
 		while (dsh->_environ[i][j])
 			j++;
-		write(STDOUT_FILENO, dsh->_enviorn[i], j);
+		write(STDOUT_FILENO, dsh->_environ[i], j);
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	dsh->status = 0;

@@ -47,7 +47,7 @@ void shell_loop(data_sh *dsh)
 			input = without_comment(input);
 			if (input == NULL)
 				continue;
-			if (check_syntax_error(dsh, inout) == 1)
+			if (check_syntax_error(dsh, input) == 1)
 			{
 				dsh->status = 2;
 				free(input);

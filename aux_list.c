@@ -12,7 +12,7 @@ sep_list *add_sep_node_end(sep_list **head, char sep)
 	if (new == NULL)
 		return (NULL);
 
-	new->separatoe = sep;
+	new->separator = sep;
 	new->next = NULL;
 	temp = *head;
 

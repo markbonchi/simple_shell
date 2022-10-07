@@ -8,7 +8,7 @@ int repeated_char(char *input, int i)
 {
 	if (*(input - 1) == *input)
 		return (repeated_char(input - 1, i + 1));
-	return (i)
+	return (i);
 }
 
 /**
@@ -54,7 +54,7 @@ int error_sep_op(char *input, int i, char last)
 		}
 	}
 
-	return (errno_sep_op(input + 1, i + 1, *input));
+	return (error_sep_op(input + 1, i + 1, *input));
 }
 
 /**

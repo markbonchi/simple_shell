@@ -11,7 +11,7 @@ void _memcpy(void *newptr, const void *ptr, unsigned int size)
 	unsigned int i;
 
 	for (i = 0; i < size; i++)
-		char_newptr[i] = char_ptr[i]
+		char_newptr[i] = char_ptr[i];
 }
 
 /**

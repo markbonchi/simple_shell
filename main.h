@@ -48,7 +48,7 @@ typedef struct data
  * Description: singe ;inked list to store separators
  */
 
-typedef sep_list_s
+typedef struct sep_list_s
 {
 	char separator;
 	struct sep_list_s *next;
@@ -73,7 +73,7 @@ typedef struct r_var_list
 	int len_var;
 	char *val;
 	int len_val;
-	sruct r_var_list *next;
+	struct r_var_list *next;
 } r_var;
 
 /**
@@ -104,7 +104,7 @@ char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 /* aux_str.c */
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, char *src);
-char _strcmp(char *s1, char *s2);
+int _strcmp(char *s1, char *s2);
 char *_strchr(char *s, char c);
 char _strdpn(char *s, char *accept);
 char *_strdup(const char *s);
@@ -142,7 +142,7 @@ char *replace_input(r_var **head, char *input, char *new_input, int nlen);
 char *rep_var(char *input, data_sh *dsh);
 
 /* getline.c */
-void bring_line(char **lineptr, size_t, *n, char *buffer, size_t j);
+void bring_line(char **lineptr, size_t *n, char *buffer, size_t j);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
 /* exec_line.c */
@@ -161,7 +161,7 @@ int _env(data_sh *dsh);
 
 /* env1.c */
 char *copy_info(char *name, char *value);
-void set_env(char *name, char *value, data_sh, *dsh);
+void set_env(char *name, char *value, data_sh *dsh);
 int _setenv(data_sh *dsh);
 int _unsetenv(data_sh *dsh);
 
@@ -197,7 +197,7 @@ char *error_permission(char **args);
 char *error_path_126(data_sh *dsh);
 
 /* get_error.c */
-void get_error(data_sh *dsh, int eval);
+int get_error(data_sh *dsh, int eval);
 
 /* get_sigint.c */
 void get_sigint(int sig);
